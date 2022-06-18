@@ -16,7 +16,7 @@ connectDB()
 // const products=require('./data/products')
 
 // console.log(process.env)
-
+///
 app.get('/', (req, res) => {
     res.send('api running')
 })

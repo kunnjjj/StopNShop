@@ -1,10 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { productListReducer } from './reducers/productReducers'
+import { productListReducer,productDetailsReducer } from './reducers/productReducers'
 
 const reducer = combineReducers({
   productList: productListReducer,
+  productDetails:productDetailsReducer
 })
 
 const initialState = {}
@@ -19,27 +20,28 @@ const store = createStore(
 
 export default store
 
-// // import { createStore, combineReducers, applyMiddleware } from 'redux'
-// // import { configureStore } from '@reduxjs/toolkit'
-// // import thunk from 'redux-thunk'
-// // import { composeWithDevTools } from 'redux-devtools-extension'
-// // import { productListReducer } from './reducers/productReducers'
+// import { createStore, combineReducers, applyMiddleware } from 'redux'
+// import { configureStore } from '@reduxjs/toolkit'
+// import thunk from 'redux-thunk'
+// import { composeWithDevTools } from 'redux-devtools-extension'
+// import { productListReducer } from './reducers/productReducers'
 
-// // const reducer = combineReducers({
-// //     productList: productListReducer
-// // })
+// const reducer = combineReducers({
+//     productList: productListReducer
+// })
 
-// // const initialState = {}
+// const initialState = {}
 
-// // const middleware = [thunk]
+// const middleware = [thunk]
 
-// // const store = configureStore({
-// //     reducer,
-// //     middleware: [thunk]
-// // })
+// const store = configureStore({
+//     reducer:{
+//       productListReducer,
+//     },
+// })
 
 
-// // export default store
+// export default store
 
 // import { applyMiddleware, combineReducers,createStore } from 'redux'
 // import { configureStore } from '@reduxjs/toolkit'

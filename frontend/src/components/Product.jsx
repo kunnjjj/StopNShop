@@ -11,7 +11,6 @@ const Product = ({ product }) => {
       <Card.Body>
         <Link to={`/products/${product._id}`}>
           <Card.Title as='div'><strong>{product.name}</strong></Card.Title>
-
         </Link>
         <Card.Text as='div'>
             <Rating value={product.rating} text={`${product.numReviews} reviews`} color="red"/>

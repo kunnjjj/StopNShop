@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
 
 import { Row, Col, Image, ListGroup, Form, Button, Card, ListGroupItem } from 'react-bootstrap'
-import { addToCart } from '../actions/cartActions'
+import { addToCart,removeFromCart } from '../actions/cartActions'
 
 const CartScreen = () => {
     const { id: productId } = useParams()
@@ -26,7 +26,7 @@ const CartScreen = () => {
         }
     }, [dispatch, productId, qty])
     const removeFromCartHandler = (id) => {
-        console.log('remove')
+        dispatch(removeFromCart(id))
     }
 
     const checkoutHandler=()=>{
@@ -50,7 +50,7 @@ const CartScreen = () => {
                                         <Link to={`/products/${item.product}`}>{item.name}</Link>
                                     </Col>
                                     <Col md={2}>
-                                        Rs. {item.price}
+                                    <i className="fas fa-rupee"></i> {item.price}
                                     </Col>
                                     <Col md={2}>
                                         <Form.Control

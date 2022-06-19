@@ -14,8 +14,8 @@ const HomeScreen = () => {
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
   
-  console.log("loading " + loading);
-  console.log("prod " + products);
+  // console.log("loading " + loading);
+  // console.log("prod " + products);
 
   return (
     <>

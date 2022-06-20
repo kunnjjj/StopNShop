@@ -66,7 +66,7 @@ const RegisterScreen = () => {
             </Form.Group>
             <Form.Group controlId="confirmPassword" className='py-3'>
                 <Form.Label>Confirm Password</Form.Label>
-                <Form.Control type='confirmPassword' placeholder="Confirm Password" value={confirmPassword}
+                <Form.Control type='password' placeholder="Confirm Password" value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)} >
                 </Form.Control>
             </Form.Group>

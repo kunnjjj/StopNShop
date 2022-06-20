@@ -18,7 +18,7 @@ const Header = () => {
         <header>
             <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
                 <LinkContainer to='/'>
-                    <Navbar.Brand href="/">Stop'N'Shop</Navbar.Brand>
+                    <Navbar.Brand href="/" className='mx-3'>Stop'N'Shop</Navbar.Brand>
                 </LinkContainer>
 
                 <Container>

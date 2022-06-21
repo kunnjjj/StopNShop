@@ -1,26 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col, ListGroup, Image, Card, ListGroupItem } from 'react-bootstrap'
+import { Button, Row, Col, ListGroup, Image, Card, ListGroupItem } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
+import {createOrder} from '../actions/orderActions'
+import { useNavigate } from 'react-router-dom'
+
+
 const PlaceOrderScreen = () => {
+    // console.log("hi from placeorder")
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
+
     const addDecimal = (num) => {
         return (Math.round(num * 100) / 100).toFixed(2)
     }
+
     const cart = useSelector(state => state.cart)
     // console.log(cart)
     cart.itemsPrice = addDecimal(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
     cart.shippingPrice = addDecimal(cart.itemsPrice > 200 ? 0 : 40)
     cart.taxPrice = addDecimal(Number((0.18 * cart.itemsPrice).toFixed(2)))
     cart.totalPrice = (addDecimal(Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(Number(cart.taxPrice))))
+    
+    const orderCreate=useSelector(state => state.orderCreate)
+    const {order,success,error}=orderCreate
+ 
+    useEffect(()=>{
+        if(success){
+            // eslint-disable-next-line
+            // console.log("order in useEffect" +JSON.stringify(order))
+            const {order:ORDER}=JSON.parse(JSON.stringify(order))
+            // console.log(ORDER)
+            navigate(`/orders/${ORDER._id}`)
+        }
+    },[navigate,success,order])
+
     const placeOrderHandler = () => {
-        console.log('hello')
+        dispatch(
+            createOrder({
+            orderItems:cart.cartItems,
+            shippingAddress:cart.shippingAddress,
+            paymentMethod:cart.paymentMethod,
+            itemsPrice:cart.itemsPrice,
+            shippingPrice:cart.shippingPrice,
+            taxPrice:cart.taxPrice,
+            totalPrice:cart.totalPrice
+        }))
     }
 
     return (
         <>
-            <CheckoutSteps step1 step2 />
+            <CheckoutSteps step1 step2 step3 step4/>
             <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>
@@ -96,14 +128,15 @@ const PlaceOrderScreen = () => {
                                 </Row>
                             </ListGroupItem>
                             <ListGroupItem>
+                                {error && <Row><Message variant='danger'>{error}</Message></Row>}
+                            </ListGroupItem>
+                            <ListGroupItem>
                                 <Row>
                                     <Button type='button' className='btn-block' disabled={cart.cartItems === 0} onClick={placeOrderHandler}>PLACE ORDER</Button>
-
                                 </Row>
                             </ListGroupItem>
                         </ListGroup>
                     </Card>
-
                 </Col>
             </Row>
         </>

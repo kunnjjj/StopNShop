@@ -31,6 +31,7 @@ export const addOrderItems = asyncHandler(async (req, res) => {
         const order= await curOrder.save()
         res.status(201).json({order})
     }
+    
      
 })
 
@@ -75,6 +76,18 @@ export const updateOrderToPaid = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error("Order not Found")
     }
+})
+ 
+// @desc Get logged in user orders
+// @route GET /api/orders/myorders
+// @access Private  
+export const getMyOrders = asyncHandler(async (req, res) => {
+    
+    // console.log("hello from server")
+    const  orders=await Order.find({user:req.user._id})
+    // console.log("order in server: ",order)
+    // console.log("orders: ", orders)
+    res.json(orders)
 })
  
  

@@ -1,21 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Link, useParams } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Card, ListGroupItem } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getOrderDetails } from '../actions/orderActions'
-
+import axios from 'axios'
 
 const OrderScreen = () => {
     // console.log("hi from placeorder")
     const { id } = useParams()
+
+    const [sdkReady,setSdkReady]=useState(false)
+
     // console.log("orderId: " +id)
     const orderId = id
     const dispatch = useDispatch()
 
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails
+
+    const orderPay = useSelector(state => state.orderPay)
+    const {loading:loadingPay, success:successPay } = orderPay
 
     if (!loading) {
         const addDecimal = (num) => {
@@ -24,19 +30,39 @@ const OrderScreen = () => {
 
         // console.log(cart)
         order.itemsPrice = addDecimal(order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0))
-
-
-
     }
 
 
 
     useEffect(() => {
-        dispatch(getOrderDetails(orderId))
-    }, [dispatch, orderId])
+        const addPayPalScript=async()=>{
+            const { data: clientId}=await axios.get('/api/config/paypal')
+            const script=document.createElement('script')
+            // console.log(clientId)
+            script.type='text/javascript'
+            script.src=`https://www.paypal.com/sdk/js?client-id=${clientId}`
+            script.async=true
+            script.onload=()=>{
+                setSdkReady(true)
+            }
+            document.body.appendChild(script)
+            // console.log(clientId)
+        }
+
+        addPayPalScript()
+        if(!order || successPay){
+            dispatch(getOrderDetails(orderId))
+        } else if(!order.isPaid){
+            if(!window.paypal){
+                addPayPalScript()
+            } else{
+                setSdkReady(true)
+            }
+        }
+    }, [dispatch, orderId,successPay,order])
 
 
-    return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
+    return loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> :
 
         <>
             <h1>

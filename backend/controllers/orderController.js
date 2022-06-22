@@ -31,7 +31,6 @@ export const addOrderItems = asyncHandler(async (req, res) => {
         const order= await curOrder.save()
         res.status(201).json({order})
     }
-    
      
 })
 
@@ -46,6 +45,32 @@ export const getOrderById = asyncHandler(async (req, res) => {
     // console.log("order in server: ",order)
     if (order){
         res.json(order);
+    } else{
+        res.status(404)
+        throw new Error("Order not Found")
+    }
+})
+ 
+// @desc Update order to paid
+// @route GET /api/order/:id/pay
+// @access Private  
+export const updateOrderToPaid = asyncHandler(async (req, res) => {
+    
+    // console.log("hello from server")
+    const  order=await Order.findById(req.params.id)
+    // console.log("order in server: ",order)
+    if (order){
+        order.isPaid=true
+        order.paidAt=Date.now()
+        order.paymentResult={
+            id:req.body.id,
+            status:req.body.status,
+            update_time:req.body.update_time,
+            email_address:req.body.payer.email_address
+        }
+
+        const updatedOrder=await order.save()
+        res.json(updatedOrder)
     } else{
         res.status(404)
         throw new Error("Order not Found")

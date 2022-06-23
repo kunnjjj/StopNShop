@@ -7,7 +7,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listUsers,deleteUser } from '../actions/userActions'
 
-export const UserListScreen = () => {
+const UserListScreen = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -69,7 +69,7 @@ export const UserListScreen = () => {
                                         }
                                     </td>
                                     <td>
-                                        <LinkContainer to={`/user/${user._id}/edit`}>
+                                        <LinkContainer to={`/admin/user/${user._id}/edit`}>
                                             <Button variant='light' className='btn-sm'>
                                                 <i className="fas fa-edit"></i>
                                             </Button>
@@ -89,3 +89,5 @@ export const UserListScreen = () => {
     )
 
 }
+
+export  default UserListScreen

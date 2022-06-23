@@ -4,10 +4,10 @@ import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { register } from '../actions/userActions'
 import FormContainer from '../components/FormContainer'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { getUserDetails } from "../actions/userActions";
+import { getUserDetails,updateUser } from "../actions/userActions";
+import { USER_UPDATE_RESET } from "../constants/userConstants";
 import { useParams } from 'react-router'
 const UserEditScreen = () => {
     const {id:userId} = useParams()
@@ -23,28 +23,36 @@ const UserEditScreen = () => {
     const userDetails = useSelector(state => state.userDetails)
     const { loading, error, user } = userDetails
     // console.log("user details: "+ JSON.stringify(userDetails))
-    
+    const userUpdate = useSelector(state => state.userUpdate)
+    const { loading:loadingUpdate, error:errorUpdate, success:successUpdate } = userUpdate
 
     const submitHandler = (e) => {
         e.preventDefault()
+        dispatch(updateUser({_id:userId,name,email,isAdmin}))
     }
     // console.log("userId: ",userId)
 
     useEffect(() => {
         // console.log("user: ",user)    
-        if(!user || !user.name || user._id!==userId){
+        if(successUpdate) {
+            dispatch({type:USER_UPDATE_RESET})
+            navigate('/admin/userlist')
+        } 
+        else if(!user || !user.name || user._id!==userId){
             dispatch(getUserDetails(userId))
         } else {
             setName(user.name)
             setEmail(user.email)
-            setIsAdmin(user.isAdmin)
+            setIsAdmin(!!user.isAdmin)
         }
-    }, [user,userId,dispatch])
+    }, [user,userId,dispatch,successUpdate,navigate])
 
     return (<>
         <Link to='/admin/userlist' className='btn btn-light my-3'>Go Back </Link>
 
         <h1>Edit User</h1>
+        {loadingUpdate && <Loader/>}
+        {errorUpdate && <Message variant='danger'>{error}</Message>}
         {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
             : (
                 <FormContainer>
@@ -66,7 +74,7 @@ const UserEditScreen = () => {
                             <Form.Label>Is Admin</Form.Label>
                             <Form.Check type='checkbox'
                                 checked={isAdmin}
-                                onChange={(e) => setIsAdmin(e.target.check)}>
+                                onChange={(e) => setIsAdmin(e.target.checked)}>
                             </Form.Check>
                         </Form.Group>
                         

@@ -52,7 +52,6 @@ export const UserListScreen = () => {
                                 <th>ADMIN</th>
                                 <th></th>
                             </tr>
-
                         </thead>
                         <tbody>
                             {/* {console.log("users:  in comp " ,users)} */}

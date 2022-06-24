@@ -103,12 +103,15 @@ const ProfileScreen = () => {
             {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message> : (
                 <Table striped bordered hover responsive className='table-sm'>
                     <thead>
+                        <tr>
                         <th>ID</th>
                         <th>DATE</th>
                         <th>TOTAL</th>
                         <th>PAID</th>
                         <th>DELIVERED</th>
                         <th>DETAILS</th>
+                        </tr>
+                        
                     </thead>
                     <tbody>
                         {orders.map(order => (
@@ -127,7 +130,6 @@ const ProfileScreen = () => {
                             </tr>
                         ))}
                     </tbody>
-
                 </Table>
             )}
         </Col>

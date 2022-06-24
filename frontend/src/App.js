@@ -28,7 +28,7 @@ const App = () => {
         <Container>
           <Routes>
           
-            <Route path='/orders/:id' element={<OrderScreen />} />
+            <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/shipping' element={<ShippingScreen />} />

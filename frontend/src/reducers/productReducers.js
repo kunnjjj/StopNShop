@@ -9,9 +9,10 @@ export const productListReducer = (state = { loading:true,products: [],error:fal
             return { loading: false, error: action.payload }
         default:
             return state
-    }
+    } 
 }
-export const productDetailsReducer = (state = { loading:true,product:{reviews:[]},error:false }, action) => {
+
+export const productDetailsReducer = (state = { loading:true,product:{reviews:[]} }, action) => {
     switch (action.type) {
         case PRODUCT_DETAILS_REQUEST:
             return { loading:true ,product:{reviews:[]}}

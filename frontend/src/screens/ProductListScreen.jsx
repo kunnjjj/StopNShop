@@ -32,7 +32,7 @@ const ProductListScreen = () => {
     useEffect(() => {
         dispatch({type:PRODUCT_CREATE_RESET})
 
-        if (userInfo && !userInfo.isAdmin) {
+        if (!userInfo.isAdmin) {
             navigate('/login')
         } 
 
@@ -102,6 +102,7 @@ const ProductListScreen = () => {
                                                 <i className="fas fa-edit"></i>
                                             </Button>
                                         </LinkContainer>
+                                
                                         <Button variant="danger" className='btn-sm' onClick={() => deleteHandler(product._id)}>
                                             <i className="fas fa-trash"></i>
                                         </Button>

@@ -6,6 +6,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 
 import { listProducts } from '../actions/productActions'
+import ProductCarousel from '../components/ProductCarousel'
 const HomeScreen = () => {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -19,6 +20,7 @@ const HomeScreen = () => {
 
   return (
     <>
+      <ProductCarousel/>
       <h1>Latest Products</h1>
       {loading? <Loader/> : error ?  <Message variant='danger'>{error}</Message>:
         //  <h3></h3>

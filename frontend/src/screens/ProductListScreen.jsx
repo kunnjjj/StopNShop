@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listProducts,deleteProduct,createProduct} from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import Meta from "../components/Meta";
 
 const ProductListScreen = () => {
 
@@ -55,6 +56,7 @@ const ProductListScreen = () => {
 
     return (
         <>
+        <Meta title='Products' />
             <Row className="align-items-center">
                 <Col>
                     <h1>Products</h1>

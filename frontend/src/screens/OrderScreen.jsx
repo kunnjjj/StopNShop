@@ -9,6 +9,7 @@ import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions
 import axios from 'axios'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from "../constants/orderConstants";
 import { useNavigate } from "react-router-dom";
+import Meta from "../components/Meta";
 
 const OrderScreen = () => {
     // console.log("hi from placeorder")
@@ -87,9 +88,10 @@ const OrderScreen = () => {
         dispatch(deliverOrder(order))
     }
 
-    return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
+    return (loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
 
         <>
+            <Meta title='Order' />
             <h1>
                 Order ID: {order._id}
             </h1>
@@ -215,7 +217,7 @@ const OrderScreen = () => {
                 </Col>
             </Row>
 
-        </>
+        </>)
 }
 
 export default OrderScreen

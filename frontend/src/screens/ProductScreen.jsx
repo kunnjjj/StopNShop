@@ -12,7 +12,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { useNavigate } from 'react-router-dom'
 import { PRODUCT_CREATE_REVIEW_REQUEST } from '../constants/productConstants'
-
+import Meta from '../components/Meta'
 
 
 const ProductScreen = () => {
@@ -62,6 +62,7 @@ const ProductScreen = () => {
     }
     return (
         <>
+            <Meta title={product.name} />
             <Link className='btn btn-light my-3' to="/">Go Back</Link>
             {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
                 <>

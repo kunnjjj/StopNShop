@@ -6,7 +6,7 @@ import FormContainer from '../components/FormContainer'
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useNavigate } from 'react-router-dom'
 import { savePaymentMethod } from "../actions/cartActions";
-
+import Meta from "../components/Meta";
 const PaymentScreen = () => {
     const cart = useSelector(state => state.cart)
     const { shippingAddress } = cart
@@ -29,6 +29,8 @@ const PaymentScreen = () => {
     }
 
     return (
+    <>
+        <Meta title='Payment' />
         <FormContainer>
             <CheckoutSteps step1 step2 step3 />
             <h1>Payment Method</h1>
@@ -47,19 +49,19 @@ const PaymentScreen = () => {
                                 value='payPal'
                                 checked
                                 onChange={e => setPaymentMethod(e.target.value)}>
-                                
+
                             </Form.Check>
                         </Row>
                         {/* <Row>
                             <Form.Check type='radio'
-                                label='UPI'
-                                id='UPI'
+                            label='UPI'
+                            id='UPI'
                                 name='paymentMethod'
                                 value='UPI'
                                 checked
                                 onChange={e => setPaymentMethod(e.target.value)}>
                                 
-                            </Form.Check>
+                                </Form.Check>
                         </Row> */}
                         <Row>
                             <Form.Check type='radio'
@@ -71,7 +73,7 @@ const PaymentScreen = () => {
 
                             </Form.Check>
                         </Row>
-                        
+
                     </Col>
                 </Form.Group>
                 <Button type='submit' variant='primary' className="my-3" onClick={submitHandler}>
@@ -79,6 +81,7 @@ const PaymentScreen = () => {
                 </Button>
             </Form>
         </FormContainer>
+    </>
     )
 }
 

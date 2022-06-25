@@ -6,7 +6,7 @@ import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import {createOrder} from '../actions/orderActions'
 import { useNavigate } from 'react-router-dom'
-
+import Meta from "../components/Meta";
 
 const PlaceOrderScreen = () => {
     // console.log("hi from placeorder")
@@ -52,6 +52,7 @@ const PlaceOrderScreen = () => {
 
     return (
         <>
+            <Meta title='Place Order' />
             <CheckoutSteps step1 step2 step3 step4/>
             <Row>
                 <Col md={8}>

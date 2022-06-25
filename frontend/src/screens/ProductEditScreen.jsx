@@ -10,7 +10,7 @@ import {PRODUCT_DETAILS_SUCCESS, PRODUCT_UPDATE_RESET} from '../constants/produc
 import { useParams } from 'react-router'
 import axios from 'axios'
 import { updateProduct } from "../actions/productActions";
-
+import Meta from "../components/Meta";
 const ProductEditScreen = () => {
     const { id: productId } = useParams()
     const [name, setName] = useState('')
@@ -108,6 +108,7 @@ const ProductEditScreen = () => {
     }
 
     return (<>
+    <Meta title={product.name} />
         <Link to='/admin/productlist' className='btn btn-light my-3'>Go Back </Link>
         <FormContainer>
             <h1>Edit Product</h1>

@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { getUserDetails,updateUser } from "../actions/userActions";
 import { USER_UPDATE_RESET } from "../constants/userConstants";
 import { useParams } from 'react-router'
+import Meta from "../components/Meta";
 const UserEditScreen = () => {
     const {id:userId} = useParams()
     const [name, setName] = useState('')
@@ -48,6 +49,7 @@ const UserEditScreen = () => {
     }, [user,userId,dispatch,successUpdate,navigate])
 
     return (<>
+        <Meta title={user.name} />
         <Link to='/admin/userlist' className='btn btn-light my-3'>Go Back </Link>
 
         <h1>Edit User</h1>

@@ -1,6 +1,9 @@
 {
   "name": "stopnshop",
   "version": "1.0.0",
+  "engines":{
+    "node":"16.15.0"
+  },
   "description": "MERN Shopping cart application",
   "main": "index.js",
   "type": "module",

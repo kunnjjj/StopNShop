@@ -49,12 +49,12 @@ This is an eCommerce web application created with MERN Stack. It has user authen
 https://stop-n-shop-app.herokuapp.com/
 
 # Author 
-* Github: https://github.com/kunnjjj
+* GitHub: https://github.com/kunnjjj
 * Email: kunj57932@gmail.com
 * Linkedln: https://www.linkedin.com/in/kunj-arora-ka19/
 
 # Acknowledgments
-* Github: https://github.com/bradtraversy
+* GitHub: https://github.com/bradtraversy
 * Website: https://www.traversymedia.com/
 
 
